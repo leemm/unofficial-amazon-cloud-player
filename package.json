@@ -1,0 +1,13 @@
+{
+  "name": "cloud-player",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "electron-bin": "^0.37.3"
+  },
+  "scripts": {},
+  "author": "Lee M <lee@hma.co.uk> (https://github.com/leemm/)",
+  "license": "ISC"
+}
