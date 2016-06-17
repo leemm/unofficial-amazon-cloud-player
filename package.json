@@ -1,13 +1,22 @@
 {
   "name": "cloud-player",
+  "productName": "Amazon Cloud Player",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "app-root-dir": "^1.0.2",
+    "convict": "^1.4.0",
+    "fs-extra": "^0.30.0",
+    "last.fm.api": "^0.1.3",
+    "plist": "^1.2.0"
+  },
   "devDependencies": {
     "electron-bin": "^0.37.3"
   },
-  "scripts": {},
+  "scripts": {
+    "start": "electron main.js"
+  },
   "author": "Lee M <lee@hma.co.uk> (https://github.com/leemm/)",
   "license": "ISC"
 }

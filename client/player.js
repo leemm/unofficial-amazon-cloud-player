@@ -1,4 +1,6 @@
 
+const { ipcRenderer } = require('electron');
+
 window.onload = function() {
 
 	// md5 needed for hashing/track checking
@@ -13,7 +15,7 @@ window.onload = function() {
 /**
  * Use jquery (already loaded by Last.FM) to search for the playing track info
  */
-var findTrackInfo = function(){
+const findTrackInfo = function(){
 
     let currentTrackInfo = {};
 
@@ -43,7 +45,13 @@ var findTrackInfo = function(){
 			if (currentTrackInfo.hash){
 
 				// If tracks are different i.e. new track update details
-				let checkHash = generateHash(currentTrackInfo);
+				let checkObj = {
+					artist: artist.text(),
+					track: track.text(),
+					album: album.length > 0 ? album.text() : '',
+					track: art.length > 0 ? art.attr('src') : ''
+				}, checkHash = generateHash(checkObj);
+
 				if (currentTrackInfo.hash !== checkHash){
 					setTrackInfo();
 				}
@@ -52,7 +60,7 @@ var findTrackInfo = function(){
 				setTrackInfo();
 			}
 
-			alert(JSON.stringify(currentTrackInfo));
+			ipcRenderer.send('track', JSON.stringify(currentTrackInfo));
 
 		}
 
@@ -65,7 +73,7 @@ var findTrackInfo = function(){
  * @param  {Object} currentTrackInfo
  * @return {String} Hash
  */
-var generateHash = function(currentTrackInfo){
+const generateHash = function(currentTrackInfo){
 
 	let checkObj = {};
 

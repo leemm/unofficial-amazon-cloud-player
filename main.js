@@ -1,53 +1,95 @@
-const electron = require('electron');
-// Module to control application life.
-const { app } = electron;
-// Module to create native browser window.
-const { BrowserWindow } = electron;
+const electron = require('electron'),
+    config = require('./config.js'),
+    pkg = require('./package.json'),
+    plist = new (require('./lib/plist.js'))(config),
+    lastfm = new (require('./lib/last.fm.js'))(config, plist),
+    { app, BrowserWindow, ipcMain, Menu, MenuItem } = electron;
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let win;
+let win, prefs;
 
-function createWindow() {
-    // Create the browser window.
-    win = new BrowserWindow({ width: 1000, height: 600 });
+app.setName(pkg.productName);
 
-    // and load the index.html of the app.
+// Events
+app.on('ready', () => {
+    createWindow();
+    createPrefs();
+});
+
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
+
+app.on('activate', () => {
+    if (win === null) {
+        createWindow();
+        createPrefs();
+    }
+});
+
+
+// Windows
+const createWindow = function() {
+    win = new BrowserWindow({ width: plist.get('width'), height: plist.get('height') });
+
     win.loadURL(`file://${__dirname}/index.html`);
 
-    // Open the DevTools.
-    win.webContents.openDevTools();
+    if (config.get('debug') === true){ win.webContents.openDevTools(); }
 
-    // Emitted when the window is closed.
     win.on('closed', () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
         win = null;
     });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+const createPrefs = function() {
+    prefs = new BrowserWindow({
+        width: 400,
+        height: 400,
+        show: false
+    });
 
-// Quit when all windows are closed.
-app.on('window-all-closed', () => {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    //if (process.platform !== 'darwin') {
-        app.quit();
-    //}
+    prefs.loadURL(`file://${__dirname}/prefs.html`);
+
+    prefs.on('closed', () => {
+        prefs = null;
+    });
+}
+
+
+// Menu
+
+// const name = app.getName();
+
+// var menu = Menu.buildFromTemplate([
+//   {
+//     label: 'Electron',
+//     submenu: [
+//       {
+//         label: 'Prefs',
+//         click: function(){
+//           alert('hello menu');
+//         }
+//       }
+//     ]
+//   }
+// ]);
+// Menu.setApplicationMenu(menu);
+
+
+// IPC Handling
+
+var currentTrackHash = '';
+
+ipcMain.on('toggle-prefs', () => {
+    if (prefsWindow.isVisible()){ prefsWindow.hide(); } else { prefsWindow.show(); }
 });
 
-app.on('activate', () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (win === null) {
-        createWindow();
+ipcMain.on('track', (event, track) => {
+    if (track && track.indexOf('{') > -1){ track = JSON.parse(track); }
+
+    if (track.hash !== currentTrackHash){
+        currentTrackHash = track.hash;
+        lastfm.scrobble(track);
     }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
