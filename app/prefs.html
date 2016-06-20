@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Preferences</title>
+        <link href="./client/reset.css" media="screen" rel="stylesheet" />
+        <link href="./client/checkbox.css" media="screen" rel="stylesheet" />
+        <link href="./client/font-awesome.min.css" media="screen" rel="stylesheet" />
+        <link href="./client/prefs.css" media="screen" rel="stylesheet" />
+
+        <script>window.$ = window.jQuery = require('jquery');</script>
+        <script src="./client/jquery.min.js"></script>
+        <script src="./client/jquery.querystring.js"></script>
+        <script src="./client/prefs.js"></script>
+    </head>
+    <body>
+
+        <webview id="webview" src="about:blank" style="position: absolute; width: 100%; height: 100%; visibility: hidden;"></webview>
+
+        <div id="form-container">
+            <form>
+                <fieldset>
+                    <legend>General</legend>
+
+                    <div class="form-row">
+                        <label class="form-label">Amazon Prime:</label>
+                        <input type="checkbox" id="show_prime" class="css-checkbox" />
+                        <label for="show_prime" class="css-label lrg chrome-style">Show</label>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label with-button"l>Last.FM:</label>
+                        <button id="last_fm_auth"><i class="fa fa-lastfm fa-lg"></i><span>Authorise</span></button>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+
+    </body>
+</html>
