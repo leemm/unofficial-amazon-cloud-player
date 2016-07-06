@@ -1,13 +1,13 @@
 Unofficial Amazon Music Player
 ==============================
 
-[![Build Status](https://travis-ci.org/leemm/last.fm.api.svg?branch=master)](https://travis-ci.org/leemm/last.fm.api)
+[![Build Status](https://travis-ci.org/leemm/unofficial-amazon-cloud-player?branch=master)](https://travis-ci.org/leemm/unofficial-amazon-cloud-player)
 
 Alternative [Amazon Music Player](https://music.amazon.co.uk) which supports audio scrobbling via Last.FM (since Amazon won't put it in their official app).
 
 # Download
 
-[https://github.com/leemm/unofficial-amazon-cloud-player/blob/master/dist/osx/Unofficial%20Amazon%20Player-0.1.1.dmg](https://github.com/leemm/unofficial-amazon-cloud-player/blob/master/dist/osx/Unofficial%20Amazon%20Player-0.1.1.dmg)
+[https://github.com/leemm/unofficial-amazon-cloud-player/releases/download/v0.1.1/Unofficial.Amazon.Player-0.1.1.dmg](https://github.com/leemm/unofficial-amazon-cloud-player/releases/download/v0.1.1/Unofficial.Amazon.Player-0.1.1.dmg)
 
 # Requirements
 
