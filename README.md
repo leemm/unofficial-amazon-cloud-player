@@ -5,6 +5,10 @@ Unofficial Amazon Music Player
 
 Alternative [Amazon Music Player](https://music.amazon.co.uk) which supports audio scrobbling via Last.FM (since Amazon won't put it in their official app).
 
+# Download
+
+[Unofficial Amazon Player-0.1.1.dmg](Unofficial Amazon Player-0.1.1.dmg)
+
 # Requirements
 
 * Mac OS X 10.8 or later
