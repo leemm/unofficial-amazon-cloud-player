@@ -11,7 +11,7 @@ class PList {
 		this.defaults = {
 			width: 1100,
 			height: 700,
-			scrobble_percent: 30
+			scrobble_percent: 50
 		};
 
 		this._data = this._read();

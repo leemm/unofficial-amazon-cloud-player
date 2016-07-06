@@ -1,25 +1,28 @@
 const electron = require('electron'),
-    config = require('./config.js'),
+    config = new (require('./lib/config.js'))(),
+    helpers = require('./lib/helpers.js'),
     pkg = require('./package.json'),
     plist = new (require('./lib/plist.js'))(config),
+    defaults = new (require('./lib/theme.js'))('defaults'),
+    theme = new (require('./lib/theme.js'))('dark'),
     lastfm = new (require('./lib/last.fm.js'))(config, plist),
     { app, BrowserWindow, ipcMain, Menu, MenuItem } = electron;
 
-let win, prefs, currentPlayTimestamp, currentPlayTimestampInterval;
+let splash, win, prefs, currentPlayTimestamp, currentPlayTimestampInterval, initialLoadedCheck, initialLoaded = false;
 
 app.setName(pkg.productName);
-
 
 // Events
 app.on('ready', () => {
     createMenu();
+    createSplash();
     createWindow();
 });
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
+    //if (process.platform !== 'darwin') {
         app.quit();
-    }
+    //}
 });
 
 app.on('activate', () => {
@@ -53,17 +56,65 @@ const createMenu = function(){
 
 }
 
+/**
+ * on move and resize
+ */
+const trackWindowChange = function(win) {
+
+    clearTimeout(win.resizedMovedFinished);
+    win.resizedMovedFinished = setTimeout(function(){
+        plist.set(win.getBounds());
+    }, 1000);
+
+}
+
+// Splash/Loading screen
+const createSplash = function() {
+
+    let windowOpts = {
+        backgroundColor: '#2e2c29',
+        width: plist.get('width'),
+        height: plist.get('height')
+    };
+
+    if (plist.get('x') && plist.get('y')){ windowOpts = Object.assign({ x: plist.get('x'), y: plist.get('y') }, windowOpts); }
+
+    splash = new BrowserWindow(windowOpts);
+
+    splash.loadURL(`file://${__dirname}/splash.html`);
+
+    splash.on('ready-to-show', () => {
+        splash.show();
+    });
+    splash.on('closed', () => { splash = null; });
+
+}
+
 // Windows
 const createWindow = function() {
-    win = new BrowserWindow({ width: plist.get('width'), height: plist.get('height') });
+
+    let windowOpts = {
+        show: false,
+        backgroundColor: '#2e2c29',
+        width: plist.get('width'),
+        height: plist.get('height')
+    };
+
+    if (plist.get('x') && plist.get('y')){ windowOpts = Object.assign({ x: plist.get('x'), y: plist.get('y') }, windowOpts); }
+
+    win = new BrowserWindow(windowOpts);
 
     win.loadURL(`file://${__dirname}/index.html`);
 
     if (config.get('debug') === true){ win.webContents.openDevTools(); }
 
-    win.on('closed', () => {
-        win = null;
+    win.on('move', () => { trackWindowChange(win); });
+    win.on('resize', () => { trackWindowChange(win); });
+    win.on('ready-to-show', () => {
+        initialLoaded = true;
     });
+    win.on('closed', () => { win = null; });
+
 }
 
 const createPrefs = function(show) {
@@ -93,31 +144,49 @@ const createPrefs = function(show) {
 
 // IPC Handling
 
-var currentTrackHash = '';
+var currentTrackHash = '', switchedDisplay = false;
+
+ipcMain.on('loading', (event) => {
+    if (!switchedDisplay){
+
+        switchedDisplay = true;
+        splash.close();
+        win.show();
+
+    }
+});
 
 ipcMain.on('prefs', (event, formValues) => {
+    let requiresRefresh = plist.get('show_prime').toString() != formValues.show_prime.toString();
+
     plist.set(formValues);
+
+    if (requiresRefresh){ event.sender.send('refresh'); }
 });
 
 ipcMain.on('track', (event, track) => {
     if (track && track.indexOf('{') > -1){ track = JSON.parse(track); }
 
-    let scrobble_percent = plist.get('scrobble_percent') ? parseInt(plist.get('scrobble_percent'), 10) : 20;
+    let scrobble_percent = plist.get('scrobble_percent') ? parseInt(plist.get('scrobble_percent'), 10) : 50;
 
     if (track.hash !== currentTrackHash){
         currentTrackHash = track.hash;
         lastfm.info(track)
             .then(tracks => {
 
+                if (currentPlayTimestampInterval){ clearInterval(currentPlayTimestampInterval); }
+
                 currentPlayTimestamp = tracks.timestamp;
                 currentPlayTimestampInterval = setInterval(() => {
-                    currentPlayTimestamp += 1000;
+                    currentPlayTimestamp += 3000;
 
                     let percentage = (currentPlayTimestamp - tracks.timestamp) / (tracks.endTimestamp - tracks.timestamp) * 100;
-                    console.log('percentage', percentage);
+
+                    if (config.get('debug') === true){ console.log('percentage', percentage); }
+
                     if (percentage >= scrobble_percent){
 
-                        console.log('ready to scrobble');
+                        if (config.get('debug') === true){ console.log('ready to scrobble'); }
 
                         lastfm.scrobble(tracks)
                             .then(result => { console.log(require('util').inspect(result, false, null)); })
@@ -126,13 +195,21 @@ ipcMain.on('track', (event, track) => {
                         clearInterval(currentPlayTimestampInterval);
 
                     }
-                }, 1000);
+                }, 3000);
 
             })
             .catch(err => {
                 console.error(err);
             });
     }
+});
+
+ipcMain.on('defaults', (event) => {
+    event.sender.send('theme-reply', defaults.css);
+});
+
+ipcMain.on('loaded', (event) => {
+    event.sender.send('done');
 });
 
 ipcMain.on('token', (event) => {
@@ -161,4 +238,16 @@ ipcMain.on('session', (event, token) => {
 
 ipcMain.on('app_debug', (event, data) => {
     console.log('debug', data);
+});
+
+ipcMain.on('debug-prefs', (event) => {
+    console.log('debug-prefs', plist);
+});
+
+ipcMain.on('prime', (event) => {
+    if (plist.get('show_prime').toString() != 'true'){ event.sender.send('prime-reply', require('./prime-hide.json')); }
+});
+
+ipcMain.on('theme', (event) => {
+    event.sender.send('theme-reply', theme.css);
 });

@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs-extra'),
+    util = require('util'),
 	path = require('path');
 
 class Helpers {
@@ -19,6 +20,15 @@ class Helpers {
     	}catch(err){
     		return false;
     	}
+    }
+
+    /**
+     * dump entire object so can be used in console.log
+     * @param  {Object} obj
+     * @return {String}
+     */
+    static dump(obj){
+        return util.inspect(obj, false, null);
     }
 }
 

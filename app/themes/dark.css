@@ -1,0 +1,274 @@
+/**
+ * Left column
+ */
+
+#left-content {
+	background-color: #272727;
+}
+
+#libraryEntries {
+	background-color: transparent;
+}
+
+#left-content.dragonfly .mainLinks .mainLinksTitle, #left-content.dragonfly .mainLinks .mainLinksTitle:hover {
+	color: #FFF;
+	background-color: #000;
+	margin-bottom: 10px;
+}
+
+#left-content.dragonfly {
+    border-right: none;
+}
+
+#left-content.dragonfly li .libraryHeader:hover {
+	background-color: transparent;
+}
+
+#left-content.dragonfly li a {
+	color: #FFF;
+}
+
+#left-content.dragonfly li:hover, #left-content.dragonfly .actionSection li:hover {
+	background-color: transparent;
+}
+
+#left-content.dragonfly .actionSection li a, #left-content.dragonfly #createNewPlaylistLink {
+	color: #FFF;
+}
+
+#left-content.dragonfly li.viewing a, #left-content.dragonfly .actionSection li a:hover, #left-content.dragonfly li a:hover, #left-content.dragonfly #createNewPlaylistLink:hover {
+	color: #FF9900;
+}
+
+#left-content.dragonfly .libraryPanel {
+	border: none;
+}
+
+#left-content.dragonfly li a.linkAction {
+	background-color: transparent !important;
+}
+
+
+/**
+ * Track List/Info
+ */
+
+.songCount {
+    color: #A5A5A5;
+}
+
+#artistDetailsViewHeader {
+    background-color: transparent;
+    height: 55px;
+    border: 0;
+}
+
+.headerContainer {
+    border-bottom: 0;
+}
+
+#artistDetailsViewHeader .artistDetailsHeaderArt, #artistDetailsViewHeader .artistDetailsHeaderDescription .viewHeader .viewName {
+    display: none;
+}
+
+#artistDetailsViewHeader .artistDetailsHeaderDescription {
+    padding-left: 0 !important;
+}
+
+#artistDetailsViewHeader .artistDetailsHeaderDescription .viewHeader .viewTitle {
+    color: #FFF;
+    font-size: 2.0rem;
+}
+
+#artistDetailsViewHeader .artistDetailsHeaderDescription .viewHeader .headerActions {
+    margin: 10px 0 5px 0;
+    float: left;
+}
+
+#artistDetailsViewHeader .artistDetailsHeaderDescription .headerActions .button, #dragonflyView .playlistDetailsHeader .headerActions .button {
+    min-width: auto;
+    border-radius: 50%;
+    background-color: #000;
+    border: 0;
+}
+
+#artistDetailsViewHeader .artistDetailsHeaderDescription .headerActions .button:hover, #dragonflyView .playlistDetailsHeader .headerActions .button:hover {
+    background-color: #FF9900;
+}
+
+#artistDetailsViewHeader .artistDetailsHeaderDescription .viewHeader .viewSubDescription {
+    line-height: 55px;
+    padding-left: 50px;
+    font-size: 0.9rem;
+}
+
+#artistDetailsViewHeader .artistDetailsHeaderDescription .headerActions .buttonText, #dragonflyView .button .buttonText {
+    display: none !important;
+}
+
+.border-gradient2 .center {
+	color: #A5A5A5;
+	background-color: #3D3D3D;
+}
+
+.mainViewHeader .headerText, .primeBrowseHeader h1 {
+	color: #FFF;
+}
+
+.grid-rails .genericTile .detailsWrapper .primaryTitle, .genericTile.artistTile .details:hover {
+	color: #FFF;
+	background-color: transparent;
+}
+
+.artistDetail .artistDetailsVirtualizedLibraryView table, .artistDetail .artistDetailsVirtualizedLibraryView table tr, .artistDetail .artistDetailsVirtualizedLibraryView table td {
+	border: none !important;
+}
+
+.artistDetail .artistDetailsVirtualizedLibraryView table td {
+	border-bottom: 1px solid #AAA !important;
+	color: #FFF !important;
+	font-weight: 100 !important;
+	border-radius: 0 !important;
+}
+
+.playlistDetailsListItem:not(.emptyRow):hover {
+	background-color: #000 !important;
+}
+
+.listViewDurationContextButton {
+	color: #000;
+	border-color: #bdc1c4;
+}
+
+.listViewDurationContextButton .listViewDuration {
+	color: #FFF;
+}
+
+.listViewDurationContextButton .listViewContextButton, .listViewDurationContextButton .active {
+	background-color: #272727;
+    color: #FFF !important;
+    border: 1px solid #3D3D3D;
+}
+
+.playlistDetailsList .selectedItem {
+    background-color: #000;
+}
+
+.grid-rails .genericTile .detailsWrapper .primaryTitle a, .grid-rails .genericTile .detailsWrapper .secondaryTitle {
+    color: #AAA;
+}
+
+.grid-rails .genericTile .detailsWrapper .primaryTitle a:hover, .grid-rails .genericTile .detailsWrapper .secondaryTitle:hover {
+    color: #FFF;
+}
+
+.playlistDetailsListItem {
+    transition: none !important;
+}
+
+tr.playlistDetailsListItem.artistDetailsAlbumListItem.emptyRow td, tr.playlistDetailsListItem.artistDetailsAlbumListItem.lastItem td {
+    border-bottom: none !important;
+}
+
+.songList .subHeader {
+    background-color: transparent;
+}
+
+.albumList .titleCell, .songList .titleCell, .titleCell, .playlistDetailsListItem .title {
+    color: #FFF !important;
+    font-weight: 100;
+}
+
+.headerContainer {
+    margin-bottom: 5px;
+}
+
+.songList .subHeader th {
+    border-right: 1px solid #A5A5A5;
+    line-height: 15px;
+    color: #A5A5A5;
+}
+
+.songList .subHeader th {
+    padding-left: 10px;
+}
+
+.songTracks tr:hover, .songList .selectable.selected td {
+    background-color: #000 !important;
+}
+
+.songList .selectable {
+    border-top: 1px solid #AAA !important;
+}
+
+.songTracks tr td, .songTracks tr td a {
+    color: #FFF;
+    font-weight: 100;
+}
+
+.playCell .playLinkIcon:hover {
+    color: #FFF !important;
+}
+
+.songList .titleCell, .songList .artistCell, .songList .albumCell, .songList .durationCell, .songList .dateCell {
+    padding-left: 10px;
+}
+
+.buttons.primary {
+    color: #FFF !important;
+}
+
+.buttons.primary .left, .buttons.primary .right {
+    border-left: none;
+    border-right: none;
+}
+
+.buttons.secondary .left, .buttons.secondary .right, .buttons.secondary .buttonCenter, .buttons.secondary:hover .left, .buttons.secondary:hover .right, .buttons.secondary:hover .buttonCenter {
+    border: 1px solid #000 !important;
+    background-color: #000 !important;
+    color: #FFF !important;
+    height: 32px;
+}
+
+.buttons.secondary:hover {
+    opacity: 0.3;
+}
+
+.headerIconContainer {
+    border: 2px solid #FFF;
+    background-color: #000;
+    color: #FFF;
+}
+
+.viewName {
+    display: none;
+}
+
+.viewHeader .viewTitle {
+    color: #FFF;
+}
+
+#dragonflyView .albumDetailsHeader .artistLink a {
+    color: #A5A5A5;
+}
+
+.playlistDetailsList:first-child .selectedItem td {
+    border-top: none;
+}
+
+#dragonflyView .playlistDetailsHeader .headerActions .button.grey {
+    color: #FFF;
+}
+
+
+/**
+ * Right column
+ */
+
+#rightPanel.dragonfly .title, #rightPanel.dragonfly a, #rightPanel.dragonfly .recFooter .linkLike {
+    color: #FFF;
+}
+
+.button.secondary .buttonOption {
+    color: #000 !important;
+}

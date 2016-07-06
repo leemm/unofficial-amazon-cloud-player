@@ -1,0 +1,13 @@
+{
+	"cssSelectors": [
+		{ "value" : "#primeNav" },
+		{ "value" : "*[data-ui-click='goStore']:parent" },
+		{ "value" : "#importFeature:parent" },
+		{ "value" : "#right-content-panel" },
+		{ "value" : "#latestPurchasesLink:parent" },
+		{ "value" : "#latestUploadsLink:parent" },
+		{ "value" : "#content-messaging" },
+		{ "value" : ".actionButtons .downloadButton", "persistent" : true },
+		{ "value" : "#.headerActions .showContextMenu", "persistent" : true }
+	]
+}

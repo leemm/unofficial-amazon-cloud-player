@@ -6,6 +6,8 @@ window.onload = function() {
 
 	formValues = document.location.search ? $.querystring(document.location.search) : {};
 
+	//ipcRenderer.send('debug-prefs');
+
 	setForm();
 
 	// Change form fields
@@ -81,4 +83,8 @@ ipcRenderer.on('session-reply', (event, session) => {
 
 	setForm();
 	ipcRenderer.send('prefs', formValues);
+});
+
+ipcRenderer.on('refresh', () => {
+	alert('This setting requires you to restart the app to see your changes.');
 });

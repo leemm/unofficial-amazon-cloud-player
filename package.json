@@ -1,7 +1,7 @@
 {
-  "name": "unofficialamazoncloudplayer",
-  "productName": "Amazon Cloud Player",
-  "description": "Unofficial Amazon Cloud Player with Last.FM support",
+  "name": "unofficialamazonmusicplayer",
+  "productName": "Unofficial Amazon Player",
+  "description": "Unofficial Amazon Music Player with Last.FM support",
   "devDependencies": {
     "electron-builder": "^5.4.2",
     "electron-prebuilt": "^1.2.3"
@@ -21,7 +21,5 @@
     "dist:win32": "build --platform win32 --arch ia32",
     "dist:win64": "build --platform win32 --arch x64"
   },
-  "dependencies": {
-    "jquery": "^3.0.0"
-  }
+  "dependencies": {}
 }

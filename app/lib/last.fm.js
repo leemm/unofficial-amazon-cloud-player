@@ -52,7 +52,8 @@ class LastFM {
 		})
 			.then(info => info.track)
 			.then(track => {
-				return { mbid: track.mbid, duration: parseInt(track.duration, 10) || 60000 };
+				if (!track){ track = { mbid: null, duration: 30000 }; }
+				return { mbid: track.mbid, duration: parseInt(track.duration, 10) };
 			})
 			.then(meta => {
 
@@ -79,8 +80,9 @@ class LastFM {
 	 */
 	scrobble(track){
 
-		console.log('to scrobble', track);
+		if (this.config.get('debug') === true){ console.log('to scrobble', track); }
 
+		track.timestamp = track.timestamp / 1000;
 		if (track.duration){ delete track.duration; }
 		if (track.endTimestamp){ delete track.endTimestamp; }
 
