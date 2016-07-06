@@ -7,7 +7,7 @@ Alternative [Amazon Music Player](https://music.amazon.co.uk) which supports aud
 
 # Download
 
-[Unofficial Amazon Player-0.1.1.dmg](Unofficial Amazon Player-0.1.1.dmg)
+[https://github.com/leemm/unofficial-amazon-cloud-player/blob/master/dist/osx/Unofficial%20Amazon%20Player-0.1.1.dmg](https://github.com/leemm/unofficial-amazon-cloud-player/blob/master/dist/osx/Unofficial%20Amazon%20Player-0.1.1.dmg)
 
 # Requirements
 
@@ -31,4 +31,4 @@ npm install
 npm start
 ```
 
-To build check the npm scripts in package.json.  **npm run <scriptname>**.
+To build check the npm scripts in package.json.  **npm run -scriptname-**.
