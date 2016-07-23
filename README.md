@@ -7,7 +7,7 @@ Alternative [Amazon Music Player](https://music.amazon.co.uk) which supports aud
 
 # Download
 
-[Unofficial.Amazon.Player-0.1.1.dmg](https://github.com/leemm/unofficial-amazon-cloud-player/releases/download/v0.1.1/Unofficial.Amazon.Player-0.1.1.dmg)
+[Unofficial.Amazon.Player-0.1.2.dmg](https://github.com/leemm/unofficial-amazon-cloud-player/releases/download/v0.1.2/Unofficial.Amazon.Player-0.1.2.dmg)
 
 # Requirements
 

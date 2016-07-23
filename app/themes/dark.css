@@ -1,4 +1,20 @@
 /**
+ * Sign In
+ */
+
+#center-8, #ap_signin1a_password_section_title, #ap_signin1a_new_cust_radio_row, #ap_signin1a_exist_cust_radio_row, #ap_signin_remember_me_learnmore_link, #fwcim-container, #ap_signin1a_forgot_password_row, #ap_signin1a_pagelet_title p, #ap_header {
+    display:none;
+}
+
+#signin-slot {
+    margin: 0 !important;
+}
+
+#ap_signin_form label {
+    color: #FFF;
+}
+
+/**
  * Left column
  */
 

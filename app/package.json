@@ -2,7 +2,7 @@
   "name": "unofficialamazonmusicplayer",
   "productName": "Unofficial Amazon Player",
   "homepage": "https://github.com/leemm/unofficial-amazon-cloud-player",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Unofficial Amazon Music Player with Last.FM support",
   "main": "index.js",
   "dependencies": {

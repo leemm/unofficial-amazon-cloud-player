@@ -52,13 +52,27 @@ const loadScripts = function(callback){
 const checkForLoaded = function(){
 
 	let loaded = setInterval(function(){
-		let display = $('#mainContentLoadingSpinner').css('display');
-		if (display && display === 'none'){
-			clearInterval(loaded);
-			ipcRenderer.send('loaded');
-		}else if (display){
-			setTimeout(function(){ ipcRenderer.send('loading'); }, 200);
+		let signInDisplay = $('h1').text() == 'Sign In',
+			display = $('#mainContentLoadingSpinner').css('display') || '';
+
+		if (signInDisplay){
+
+			ipcRenderer.send('loading');
+			setTimeout(function(){
+				clearInterval(loaded);
+				ipcRenderer.send('loaded');
+			}, 2000); // artificial timeout
+
+		}else{
+			if (display && display === 'none'){
+				ipcRenderer.send('loading');
+				clearInterval(loaded);
+				ipcRenderer.send('loaded');
+			} else if (display.length === 0){
+				setTimeout(function(){ ipcRenderer.send('loading'); }, 200);
+			}
 		}
+
 	}, 100);
 
 };
